@@ -1,6 +1,6 @@
 ---
 name: md-first-confirm
-description: 当用户要求“先出稿”“先看方案”“确认后再改”时，先用 Markdown 给出拟修改内容，用户确认后再实际修改。
+description: 先展示 Markdown 修改稿，确认后再修改目标。仅当明确点名并要求使用本技能时调用。
 ---
 
 # 改之前先确认
