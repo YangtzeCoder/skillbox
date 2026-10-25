@@ -5,6 +5,10 @@
 - [file-backup](skills/file-backup/SKILL.md)：约定单个文件备份的目录与命名规则。
 - [md-first-confirm](skills/md-first-confirm/SKILL.md)：用户要求修改前审核时，先提供 Markdown 草稿，确认后再执行。
 
+## 项目维护
+
+- [publish-skills](.agents/skills/publish-skills/SKILL.md)：将 `skills/` 中的全部可发布技能分别打包到 `dist/`。
+
 ## 安装
 
 可以使用 [`npx skills`](https://github.com/vercel-labs/skills) 安装本仓库中的技能。以下命令会交互式选择安装目标 Agent。
