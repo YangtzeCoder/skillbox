@@ -1,6 +1,11 @@
 ---
 name: file-backup
 description: 备份项目中的单个文件。
+version: "1.0.0"
+display_name: "文件备份"
+display_name_en: "File Backup"
+description_zh: "备份项目中的单个文件。"
+description_en: "Back up a single file in a project."
 ---
 
 # 文件备份

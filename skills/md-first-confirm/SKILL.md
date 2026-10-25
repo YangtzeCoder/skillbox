@@ -1,6 +1,11 @@
 ---
 name: md-first-confirm
 description: 先展示 Markdown 修改稿，确认后再修改目标。仅当明确点名并要求使用本技能时调用。
+version: "1.0.0"
+display_name: "改之前先确认"
+display_name_en: "Confirm Before Editing"
+description_zh: "先展示 Markdown 修改稿，确认后再修改目标。仅当明确点名并要求使用本技能时调用。"
+description_en: "Show proposed changes in Markdown and obtain confirmation before modifying the target. Use only when the user explicitly names and requests this skill."
 ---
 
 # 改之前先确认
