@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Package every skill directory containing SKILL.md into dist/*.zip."""
 
+import re
 from pathlib import Path
 from zipfile import ZIP_DEFLATED, ZipFile
 
@@ -18,12 +19,35 @@ def discover_skills(skills_directory):
     )
 
 
-def package_skill(skill_directory, output_directory):
+def read_version(skill_directory):
+    """Read a filename-safe version from the skill's front matter."""
+    skill_file = Path(skill_directory) / "SKILL.md"
+    lines = skill_file.read_text(encoding="utf-8-sig").splitlines()
+    if not lines or lines[0].strip() != "---":
+        raise ValueError(f"{skill_file}: missing front matter")
+    try:
+        end = next(i for i in range(1, len(lines)) if lines[i].strip() == "---")
+    except StopIteration:
+        raise ValueError(f"{skill_file}: unterminated front matter") from None
+
+    versions = [line.partition(":")[2].strip() for line in lines[1:end]
+                if re.match(r"^version\s*:", line)]
+    if len(versions) != 1:
+        raise ValueError(f"{skill_file}: expected exactly one version")
+    version = versions[0]
+    if len(version) >= 2 and version[0] in "\"'" and version[-1] == version[0]:
+        version = version[1:-1]
+    if not re.fullmatch(r"[A-Za-z0-9](?:[A-Za-z0-9._+\-]*[A-Za-z0-9])?", version):
+        raise ValueError(f"{skill_file}: invalid or empty version {version!r}")
+    return version
+
+
+def package_skill(skill_directory, output_directory, version):
     """Create a ZIP whose root is the skill directory's contents."""
     skill_directory = Path(skill_directory)
     output_directory = Path(output_directory)
     output_directory.mkdir(parents=True, exist_ok=True)
-    archive_path = output_directory / f"{skill_directory.name}.zip"
+    archive_path = output_directory / f"{skill_directory.name}-{version}.zip"
 
     with ZipFile(archive_path, "w", compression=ZIP_DEFLATED) as archive:
         for path in sorted(skill_directory.rglob("*")):
@@ -55,7 +79,16 @@ def main():
     if not skills:
         raise SystemExit(f"No skill directories containing SKILL.md found in {skills_directory}")
 
-    archives = [package_skill(skill_directory, output_directory) for skill_directory in skills]
+    try:
+        versions = [read_version(skill_directory) for skill_directory in skills]
+    except (OSError, UnicodeError, ValueError) as error:
+        raise SystemExit(str(error)) from error
+
+    archive_names = [f"{skill.name}-{version}.zip" for skill, version in zip(skills, versions)]
+    if len({name.casefold() for name in archive_names}) != len(archive_names):
+        raise SystemExit("Skill archive names collide")
+    archives = [package_skill(skill, output_directory, version)
+                for skill, version in zip(skills, versions)]
 
     # Remove obsolete packages only after every current skill was packaged successfully.
     expected_names = {archive.name for archive in archives}
