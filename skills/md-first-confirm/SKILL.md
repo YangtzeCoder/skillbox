@@ -1,7 +1,7 @@
 ---
 name: md-first-confirm
 description: 先展示 Markdown 修改稿，确认后再修改目标。仅当明确点名并要求使用本技能时调用。
-version: "1.0.1"
+version: "1.0.2"
 display_name: "改之前先确认"
 display_name_en: "Confirm Before Editing"
 description_zh: "修改前展示 Markdown 确认稿，逐项对照原文和修改内容，获得确认后再执行。"
@@ -11,6 +11,10 @@ description_en: "Review proposed changes in Markdown alongside the original cont
 # 改之前先确认
 
 当本技能触发时，先输出 Markdown 修改稿。
+
+## 作用范围
+
+本技能仅适用于本次明确指定的修改任务，包括后续确认、调整和执行。任务完成、取消或用户要求停止使用时，流程结束。后续独立任务不会自动使用本技能，须再次明确点名。
 
 ## 规则
 
