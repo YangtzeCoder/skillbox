@@ -1,11 +1,19 @@
 ---
 name: file-backup
 description: 备份项目中的单个文件。
-version: "1.0.0"
+version: "1.0.1"
 display_name: "文件备份"
 display_name_en: "File Backup"
-description_zh: "备份项目中的单个文件。"
-description_en: "Back up a single file in a project."
+description_zh: "备份项目中的单个文件，按统一的目录和命名规则保存，方便查找和管理。"
+description_en: "Back up a single project file using consistent storage and naming rules for easy retrieval and management."
+examples_zh:
+  - "帮我备份项目中的 config.yaml 文件。"
+  - "修改前先备份 src/app.py，并标记为配置调整。"
+  - "把 README.md 备份到项目的 backup 目录。"
+examples_en:
+  - "Back up the config.yaml file in my project."
+  - "Back up src/app.py before editing it and tag it as a configuration change."
+  - "Back up README.md to the project's backup directory."
 ---
 
 # 文件备份
