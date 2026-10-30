@@ -1,7 +1,7 @@
 ---
 name: md-first-confirm
 description: 先展示 Markdown 修改稿，确认后再修改目标。仅当明确点名并要求使用本技能时调用。
-version: "1.0.2"
+version: "1.0.3"
 display_name: "改之前先确认"
 display_name_en: "Confirm Before Editing"
 description_zh: "修改前展示 Markdown 确认稿，逐项对照原文和修改内容，获得确认后再执行。"
@@ -20,6 +20,7 @@ description_en: "Review proposed changes in Markdown alongside the original cont
 
 - 确认前可以读取、分析目标，以及创建确认稿目录、保存确认稿和记录目录偏好；不得修改、删除或覆盖目标内容。
 - 确认稿逐项列出原来的内容与准备修改后的内容；新增内容注明“新增”，删除内容注明“准备删除”，并注明“目标尚未修改”。
+- 保存或更新确认稿后，在对话中提供指向该 Markdown 文件的可点击链接，明确提示用户打开预览；确认稿更新后重新提供链接。展示确认稿内容或摘要时，也保留该链接。
 - 展示确认稿后，通过提问工具询问用户是否确认执行，提供“确认执行”和“继续调整”选项。
 - 用户提出调整时，先更新确认稿，再通过提问工具重新询问。
 - 仅当用户单独回复“确认执行”，或在提问工具中选择“确认执行”时，才按当前确认稿执行修改。
